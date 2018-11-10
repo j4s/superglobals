@@ -1,4 +1,7 @@
 releases:
+v0.1.3 close #21
+ ✔ BugFix: Remove wrong tests from SessionsTest.php @done (18-11-10 16:26)
+
 v0.1.2 close #19
  ✔ BugFix: Add $_COOKIE #19 @done (18-11-10 15:24)
 
