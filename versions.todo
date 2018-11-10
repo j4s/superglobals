@@ -1,2 +1,5 @@
 releases:
+v0.1.1 close #15
+ ✔ BugFix: Исправить composer.json "autoload"->"psr-4" j4s\\ на j4s\\superglobals\\ @done (18-11-10 12:41)
+
 v0.1.0 Genesis
