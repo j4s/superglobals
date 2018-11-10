@@ -8,7 +8,7 @@ namespace j4s\superglobals;
  *
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v1.0.1 2018-11-06 00:24:18
+ * @version     v1.0.2 2018-11-10 16:25:13
  * @todo Покрыть тестами остальные методы
  * @todo Проверить комментарии phpDocumentor!!
  */
@@ -25,7 +25,7 @@ class SessionTest
         echo '<div class="utest__section">';
         echo '<h5>Session:</h5>';
         echo self::getTest();
-        echo self::getIntTest();
+        echo self::intTest();
         echo self::isNullTest();
         echo '</div>';
     }
@@ -75,33 +75,33 @@ class SessionTest
     }
 
     /**
-     * getIntTest() - тест для метода getInt
-     * @version v1.0.0 2018-10-18 11:25:08
+     * intTest() - тест для метода int
+     * @version v0.1.0 2018-11-10 16:25:34
      * @return string - html тег с сообщением результата прохождения теста
      */
-    public static function getIntTest()
+    public static function intTest()
     {
         global $UTest;
 
-        $UTest->methodName = 'getInt';
+        $UTest->methodName = 'int';
 
 
         // Arrange Test
         $UTest->nextHint = 'Запрос неустановленного ключа';
         $expect = 0;
         // Act
-        $act = Session::getInt('utest_value');
+        $act = Session::int('utest_value');
         // Assert Test
-        $UTest->isEqual("Session::getInt('utest_value');", $expect, $act);
+        $UTest->isEqual("Session::int('utest_value');", $expect, $act);
 
 
         // Arrange Test
         $UTest->nextHint = 'Запрос неустановленного ключа со значением по-умолчанию';
         $expect = 8;
         // Act
-        $act = Session::getInt('utest_value', 8);
+        $act = Session::int('utest_value', 8);
         // Assert Test
-        $UTest->isEqual("Session::getInt('utest_value', 8);", $expect, $act);
+        $UTest->isEqual("Session::int('utest_value', 8);", $expect, $act);
 
 
         // Arrange Test
@@ -109,10 +109,10 @@ class SessionTest
         $_SESSION['utest_value'] = 7;
         $expect = 7;
         // Act
-        $act = Session::getInt('utest_value');
+        $act = Session::int('utest_value');
         unset($_SESSION['utest_value']);
         // Assert Test
-        $UTest->isEqual("Session::getInt('utest_value');", $expect, $act);
+        $UTest->isEqual("Session::int('utest_value');", $expect, $act);
 
         return $UTest->functionResults;
     }
