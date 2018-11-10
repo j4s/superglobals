@@ -4,7 +4,7 @@
 namespace j4s\superglobals;
 
 /**
- * Данный класс нужен для работы с Get параметрами(в частности с $_COOKIE
+ * Данный класс нужен для работы с Cookie параметрами(в частности с $_COOKIE
  * массивом), с предварительной обработкой данных полученных в этих параметрах
  * с целью более безопасной работы, и оптимизации работы программиста.
  * 
@@ -21,7 +21,7 @@ namespace j4s\superglobals;
  * @version     v0.1.0 2018-11-10 14:49:10
  * @since       v0.2.0
  */
-class Get extends Superglobals implements SuperglobalInterface
+class Cookie extends Superglobals implements SuperglobalInterface
 {
     /** @var string $arrayName Имя массива для валидатора */
     public static $arrayName = '_COOKIE';
