@@ -2,7 +2,7 @@
     "name": "j4s/superglobals",
     "description": "Classes for work with superglobals $_GET, $_POST, $_SESSION, $_COOKIE",
     "type": "library",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "license": "MIT",
     "minimum-stability": "dev",
     "keywords": [
