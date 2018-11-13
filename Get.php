@@ -1,6 +1,8 @@
 <?php
 /** j4s\superglobals */
 
+declare(strict_types=1);
+
 namespace j4s\superglobals;
 
 /**
@@ -30,14 +32,14 @@ class Get extends Superglobals implements SuperglobalInterface
     /**
      * Возвращает значение заданного ключа либо значение по умолчанию.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        value      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |       default     |      default      |
+     * значение не заданно  |1      default     |2     default      |
+     * значение заданно     |3       value      |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.1 2018-11-05 13:15:41
      * @param string $key - ключ
-     * @param string $default - значение по умолчанию
-     * @return string - значение ключа или значение по умолчанию
+     * @param mixed $default - значение по умолчанию
+     * @return mixed - значение ключа или значение по умолчанию
      */
-    public static function get(string $key, string $default = '') : string
+    public static function get(string $key, $default = '')
     {
         $r = $_GET[$key] ?? $default;
         return $r;
@@ -46,8 +48,8 @@ class Get extends Superglobals implements SuperglobalInterface
     /**
      * Возаращает true если определен ключ. Если же ключ не задан вернет false.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        TRUE       |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        TRUE       |       FALSE       |
+     * значение не заданно  |1       TRUE       |2      FALSE       |
+     * значение заданно     |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.1 2018-11-08 16:48:12
      * @param string $key - Ключ
      * @return bool

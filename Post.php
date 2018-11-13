@@ -1,6 +1,8 @@
 <?php
 /** j4s\superglobals */
 
+declare(strict_types=1);
+
 namespace j4s\superglobals;
 
 /**
@@ -34,10 +36,10 @@ class Post extends Superglobals implements SuperglobalInterface
      * значение не заданно  |       default     |      default      |
      * @version v1.0.1 2018-11-05 13:15:41
      * @param string $key - ключ
-     * @param string $default - значение по умолчанию
-     * @return string - значение ключа или значение по умолчанию
+     * @param mixed $default - значение по умолчанию
+     * @return mixed - значение ключа или значение по умолчанию
      */
-    public static function get(string $key, string $default = '') : string
+    public static function get(string $key, $default = '')
     {
         $r = $_POST[$key] ?? $default;
         return $r;

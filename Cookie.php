@@ -1,6 +1,8 @@
 <?php
 /** j4s\superglobals */
 
+declare(strict_types=1);
+
 namespace j4s\superglobals;
 
 /**
@@ -36,10 +38,10 @@ class Cookie extends Superglobals implements SuperglobalInterface
      * @version v0.1.0 2018-11-10 14:49:23
      * @since   v0.2.0
      * @param string $key - ключ
-     * @param string $default - значение по умолчанию
-     * @return string - значение ключа или значение по умолчанию
+     * @param mixed $default - значение по умолчанию
+     * @return mixed - значение ключа или значение по умолчанию
      */
-    public static function get(string $key, string $default = '') : string
+    public static function get(string $key, $default = '')
     {
         $r = $_COOKIE[$key] ?? $default;
         return $r;

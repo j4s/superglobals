@@ -1,6 +1,8 @@
 <?php
 /** j4s\superglobals */
 
+declare(strict_types=1);
+
 namespace j4s\superglobals;
 
 /**
@@ -21,16 +23,16 @@ namespace j4s\superglobals;
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
  * @version     v2.0.0 2018-11-09 11:59:24
  */
-class Superglobals extends ValidateSuperglobalsOrNot
+abstract class Superglobals extends ValidateSuperglobalsOrNot
 {
 
     /**
      * Возвращает заданное значение, если оно является идентификатором.
      * Возвращает значение ключа, если оно содержит только следущие символы (a-zA-Z0-9_-)
      *       Значение       |   ключ определен  | ключ не определен |
-     *         Ident        |        value      |XXXXXXXXXXXXXXXXXXX|
-     *       не Ident       |       default     |XXXXXXXXXXXXXXXXXXX|
-     *      не заданно      |       default     |      default      |
+     *      не заданно      |1      default     |2     default      |
+     *         Ident        |3       value      |XXXXXXXXXXXXXXXXXXX|
+     *       не Ident       |4      default     |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.2 2018-11-09 08:27:11
      * @param string $key - Ключ
      * @param string $default - Значение по умолчанию
@@ -46,8 +48,8 @@ class Superglobals extends ValidateSuperglobalsOrNot
     /**
      * isNotSet - Возвращает true, если ключ не определен
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        FALSE      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        FALSE      |       TRUE        |
+     * значение не заданно  |1       FALSE      |2      TRUE        |
+     * значение заданно     |3       FALSE      |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.0 2018-10-17 08:40:48
      * @param string $key - Ключ
      * @return bool
@@ -61,8 +63,8 @@ class Superglobals extends ValidateSuperglobalsOrNot
      * isNull - Возвращает true, только если ключ определен,
      * но его значение не заданно
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        FALSE      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        TRUE       |       FALSE       |
+     * значение не заданно  |1       TRUE       |2      FALSE       |
+     * значение заданно     |3       FALSE      |XXXXXXXXXXXXXXXXXXX|
      * (на столе нет пустого стакана)
      * 
      * @version v1.0.2 2018-11-09 11:56:39
@@ -77,9 +79,9 @@ class Superglobals extends ValidateSuperglobalsOrNot
     /**
      * is1 - Возвращает true только если значение ключа = 1
      *                      |   ключ определен  | ключ не определен |
-     *     значение == 1    |        TRUE       |XXXXXXXXXXXXXXXXXXX|
-     *     значение != 1    |        FALSE      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        FALSE      |       FALSE       |
+     * значение не заданно  |1       FALSE      |2      FALSE       |
+     *     значение == 1    |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
+     *     значение != 1    |4       FALSE      |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.3 2018-11-09 08:28:59
      * @param string $key - Ключ
      * @return bool
@@ -92,9 +94,9 @@ class Superglobals extends ValidateSuperglobalsOrNot
     /**
      * Возвращает значение ключа, если целое число, либо значение по умолчанию
      *       Значение       |   ключ определен  | ключ не определен |
-     *     целое число      |        value      |XXXXXXXXXXXXXXXXXXX|
-     *    не целое число    |       default     |XXXXXXXXXXXXXXXXXXX|
-     *     не заданно       |       default     |      default      |
+     *     не заданно       |1      default     |2     default      |
+     *     целое число      |3       value      |XXXXXXXXXXXXXXXXXXX|
+     *    не целое число    |4      default     |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.2 2018-11-06 08:49:54
      * @param string $key - ключ
      * @param int $default - значение по умолчанию
@@ -108,17 +110,31 @@ class Superglobals extends ValidateSuperglobalsOrNot
     }
 
     /**
-     * isEmpty - Возвращает true если значение атрибута = ''
+     * Возвращает true если значение атрибута = ''.
+     * Если значение не заданно, либо ключ не определен возвращает ifNotSet
      *                      |   ключ определен  | ключ не определен |
-     * значение = ''        |        TRUE       |XXXXXXXXXXXXXXXXXXX|
-     * значение != ''       |        FALSE      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |       default     |      default      |
-     * @version v2.0.0 2018-11-06 08:55:19
+     * значение не заданно  |1      default     |2     default      |
+     * значение = ''        |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
+     * значение != ''       |4       FALSE      |XXXXXXXXXXXXXXXXXXX|
+     * @version v2.0.1 2018-11-13 10:22:49
      * @param string $key - Ключ
+     * @param bool $ifNotSet - Значение по умолчанию
      * @return bool
      */
     public static function isEmpty(string $key, bool $ifNotSet = false) : bool
     {
-        return !static::isDefined($key) || static::get($key) === '';
+        // q2
+        if (!static::isDefined($key)) {
+            return $ifNotSet;
+        // q1
+        } elseif (static::isNull($key)) {
+            return $ifNotSet;
+        // q3
+        } elseif (static::get($key) == '') {
+            return true;
+        // q4
+        } else {
+            return false;
+        }
     }
 }
