@@ -1,4 +1,12 @@
 releases:
+v0.1.7 close #4, close #9, close #28, close #29, close #30, close #32
+ ✔ BugFix: #4 Sessions.php isset в методе isDefined @done (18-11-13 11:23)
+ ✔ BugFix: #9 Superglobals.php добавить корректную обработку второго аргумента метода @done (18-11-13 11:23)
+ ✔ Feature: #28 Add Session::set(); @done (18-11-13 11:24)
+ ✔ Feature: #29 Cover Sessions.php with tests @done (18-11-13 11:24)
+ ✔ Feature: #30 Изменить в тестах и docblocks описание тестов на номера квадратов вида q* @done (18-11-13 11:48)
+ ✔ Feature: #32 Сделать класс Superglobals абстрактным @done (18-11-13 11:48)
+
 v0.1.6 Readme.md changed 2
 
 v0.1.5 Readme.md changed

@@ -1,6 +1,8 @@
 <?php
 /** j4s\superglobals */
 
+declare(strict_types=1);
+
 namespace j4s\superglobals;
 
 /**
@@ -47,16 +49,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Значение ключа';
-        $expect = 'value';
-        // Act
-        $act = Get::get('key');
-        // Assert Test
-        $UTest->isEqual("get('key');", $expect, $act);
-
-
-        // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
+        $UTest->nextHint = 'q1';
         $expect = '';
         // Act
         $act = Get::get('onlykey');
@@ -65,7 +58,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ отсутствует';
+        $UTest->nextHint = 'q2';
         $expect = '';
         // Act
         $act = Get::get('notdefined');
@@ -74,12 +67,21 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ отсутствует, но задан второй аргумент';
+        $UTest->nextHint = 'q2 со значением по умолчанию';
         $expect = 'Hello';
         // Act
         $act = Get::get('notdefined', 'Hello');
         // Assert Test
         $UTest->isEqual("get('notdefined', 'Hello');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q3';
+        $expect = 'value';
+        // Act
+        $act = Get::get('key');
+        // Assert Test
+        $UTest->isEqual("get('key');", $expect, $act);
 
 
         return $UTest->functionResults;
@@ -98,7 +100,34 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Не числовое значение ключа';
+        $UTest->nextHint = 'q1';
+        $expect = 0;
+        // Act
+        $act = Get::int('onlykey');
+        // Assert Test
+        $UTest->isEqual("int('onlykey');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = 0;
+        // Act
+        $act = Get::int('notdefined');
+        // Assert Test
+        $UTest->isEqual("int('notdefined');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q3';
+        $expect = 1;
+        // Act
+        $act = Get::int('boolean');
+        // Assert Test
+        $UTest->isEqual("int('boolean');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q4';
         $expect = 0;
         // Act
         $act = Get::int('key');
@@ -107,21 +136,12 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Не числовое значение ключа со значением по умолчанию';
+        $UTest->nextHint = 'q4 со значением по умолчанию';
         $expect = 10;
         // Act
         $act = Get::int('key', 10);
         // Assert Test
         $UTest->isEqual("int('key', 10);", $expect, $act);
-
-
-        // Arrange Test
-        $UTest->nextHint = 'Числовое значение ключа';
-        $expect = 1;
-        // Act
-        $act = Get::int('boolean');
-        // Assert Test
-        $UTest->isEqual("int('boolean');", $expect, $act);
 
 
         return $UTest->functionResults;
@@ -140,21 +160,39 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Значение ключа, содержащее символы (a-zA-Z0-9_-)';
-        $expect = 'value';
-        // Act
-        $act = Get::ident('key');
-        // Assert Test
-        $UTest->isEqual("ident('key');", $expect, $act);
-
-
-        // Arrange Test
-        $UTest->nextHint = 'Значение ключа не заданно';
+        $UTest->nextHint = 'q1';
         $expect = '';
         // Act
         $act = Get::ident('onlykey');
         // Assert Test
         $UTest->isEqual("ident('onlykey');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = '';
+        // Act
+        $act = Get::ident('notdefined');
+        // Assert Test
+        $UTest->isEqual("ident('notdefined');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = 'error';
+        // Act
+        $act = Get::ident('notdefined', 'error');
+        // Assert Test
+        $UTest->isEqual("ident('notdefined', 'error');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q3';
+        $expect = 'value';
+        // Act
+        $act = Get::ident('key');
+        // Assert Test
+        $UTest->isEqual("ident('key');", $expect, $act);
 
 
         return $UTest->functionResults;
@@ -173,7 +211,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
+        $UTest->nextHint = 'q1';
         $expect = true;
         // Act
         $act = Get::isDefined('onlykey');
@@ -182,7 +220,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ не задан';
+        $UTest->nextHint = 'q2';
         $expect = false;
         // Act
         $act = Get::isDefined('notdefined');
@@ -191,7 +229,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ со значением';
+        $UTest->nextHint = 'q3';
         $expect = true;
         // Act
         $act = Get::isDefined('key');
@@ -215,7 +253,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
+        $UTest->nextHint = 'q1';
         $expect = false;
         // Act
         $act = Get::isNotSet('onlykey');
@@ -224,7 +262,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ не задан';
+        $UTest->nextHint = 'q2';
         $expect = true;
         // Act
         $act = Get::isNotSet('notdefined');
@@ -233,7 +271,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ со значением';
+        $UTest->nextHint = 'q3';
         $expect = false;
         // Act
         $act = Get::isNotSet('key');
@@ -257,7 +295,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
+        $UTest->nextHint = 'q1';
         $expect = true;
         // Act
         $act = Get::isNull('onlykey');
@@ -266,7 +304,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ не задан';
+        $UTest->nextHint = 'q2';
         $expect = false;
         // Act
         $act = Get::isNull('notdefined');
@@ -275,7 +313,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ со значением';
+        $UTest->nextHint = 'q3';
         $expect = false;
         // Act
         $act = Get::isNull('key');
@@ -299,7 +337,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
+        $UTest->nextHint = 'q1';
         $expect = false;
         // Act
         $act = Get::is1('onlykey');
@@ -308,7 +346,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ не задан';
+        $UTest->nextHint = 'q2';
         $expect = false;
         // Act
         $act = Get::is1('notdefined');
@@ -317,21 +355,21 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ со значением не равным 1';
-        $expect = false;
-        // Act
-        $act = Get::is1('key');
-        // Assert Test
-        $UTest->isEqual("is1('key');", $expect, $act);
-
-
-        // Arrange Test
-        $UTest->nextHint = 'Ключ со значением равным 1';
+        $UTest->nextHint = 'q3';
         $expect = true;
         // Act
         $act = Get::is1('boolean');
         // Assert Test
         $UTest->isEqual("is1('boolean');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q4';
+        $expect = false;
+        // Act
+        $act = Get::is1('key');
+        // Assert Test
+        $UTest->isEqual("is1('key');", $expect, $act);
 
 
         return $UTest->functionResults;
@@ -350,8 +388,8 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ без значения';
-        $expect = true;
+        $UTest->nextHint = 'q1';
+        $expect = false;
         // Act
         $act = Get::isEmpty('onlykey');
         // Assert Test
@@ -359,8 +397,17 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ не задан';
+        $UTest->nextHint = 'q1 со значением по умолчанию';
         $expect = true;
+        // Act
+        $act = Get::isEmpty('onlykey', true);
+        // Assert Test
+        $UTest->isEqual("isEmpty('onlykey', true);", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = false;
         // Act
         $act = Get::isEmpty('notdefined');
         // Assert Test
@@ -368,7 +415,25 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'Ключ со значением';
+        $UTest->nextHint = 'q2 со значением по умолчанию';
+        $expect = true;
+        // Act
+        $act = Get::isEmpty('notdefined', true);
+        // Assert Test
+        $UTest->isEqual("isEmpty('notdefined', true);", $expect, $act);
+
+
+        // Arrange Test
+        // $UTest->nextHint = 'q3';
+        // $expect = true;
+        // // Act
+        // $act = Get::isEmpty('onlykey');
+        // // Assert Test
+        // $UTest->isEqual("isEmpty('onlykey');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q4';
         $expect = false;
         // Act
         $act = Get::isEmpty('key');
