@@ -1,4 +1,7 @@
 releases:
+v1.0.0-alpha close #36
+ ✔ Feature: #36 Выпустить v1.0.0-alpha @done (18-11-14 12:26)
+
 v0.1.7 close #4, close #9, close #28, close #29, close #30, close #32
  ✔ BugFix: #4 Sessions.php isset в методе isDefined @done (18-11-13 11:23)
  ✔ BugFix: #9 Superglobals.php добавить корректную обработку второго аргумента метода @done (18-11-13 11:23)
