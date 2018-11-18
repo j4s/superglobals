@@ -1,4 +1,7 @@
 releases:
+v1.0.0-alpha.2 close #42
+ ✔ autoload looses tests #42 @done (18-11-18 22:58)
+
 v1.0.0-alpha.1 close #37, close #38, close #39, close #24, close #27
  ✔ BugFix: make ValidateSuperglobalsOrNot() abstract #38 @done (18-11-18 13:42)
  ✔ BugFix: version in composer begins with "v" #37 @done (18-11-18 13:42)
