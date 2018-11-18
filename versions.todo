@@ -1,4 +1,11 @@
 releases:
+v1.0.0-alpha.1 close #37, close #38, close #39, close #24, close #27
+ ✔ BugFix: make ValidateSuperglobalsOrNot() abstract #38 @done (18-11-18 13:42)
+ ✔ BugFix: version in composer begins with "v" #37 @done (18-11-18 13:42)
+ ✔ BugFix: Разобраться с интерфейсом ValidatorInterface(); * @done (18-11-18 22:35)
+ ✔ BugFix: Сделать стандартную структуру файлов и папок в библиотеке #24 @done (18-11-18 22:44)
+ ✔ BugFix: change namespase of validation @done (18-11-18 22:45)
+
 v1.0.0-alpha close #36
  ✔ Feature: #36 Выпустить v1.0.0-alpha @done (18-11-14 12:26)
 
