@@ -6,20 +6,19 @@ declare(strict_types=1);
 namespace j4s\superglobals;
 
 /**
- * Class GetTest - Тесты для класса Get
+ * Тесты для класса Get
  *
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v1.0.2 2018-11-05 13:24:07
- * @todo Проверить комментарии phpDocumentor!!
+ * @version     v1.0.4 2018-12-06 12:11:49
  */
 class GetTest
 {
 
     /**
-     * run() - запускает тесты данного класса
-     * @version v1.0.1 2018-10-17 08:50:28
-     * @return Null
+     * Запускает тесты данного класса
+     * @version v1.0.3 2018-12-06 12:13:16
+     * @return void
      */
     public static function run()
     {
@@ -33,12 +32,14 @@ class GetTest
         echo self::isNullTest();
         echo self::is1Test();
         echo self::isEmptyTest();
+        echo self::floatTest();
         echo '</div>';
     }
 
     /**
-     * getTest() - тест для метода get
-     * @version v1.0.2 2018-11-05 13:24:14
+     * Тест для метода get
+     * @version v1.0.3 2018-12-06 12:05:09
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function getTest()
@@ -88,8 +89,9 @@ class GetTest
     }
 
     /**
-     * intTest() - тест для метода int
-     * @version v1.0.1 2018-10-17 08:51:55
+     * Тест для метода int
+     * @version v1.0.2 2018-12-06 12:05:15
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function intTest()
@@ -148,8 +150,9 @@ class GetTest
     }
 
     /**
-     * identTest() - тест для метода ident
-     * @version v1.0.2 2018-11-05 13:24:31
+     * Тест для метода ident
+     * @version v1.0.3 2018-12-06 12:05:22
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function identTest()
@@ -178,7 +181,7 @@ class GetTest
 
 
         // Arrange Test
-        $UTest->nextHint = 'q2';
+        $UTest->nextHint = 'q2 со значением по умолчанию';
         $expect = 'error';
         // Act
         $act = Get::ident('notdefined', 'error');
@@ -195,12 +198,22 @@ class GetTest
         $UTest->isEqual("ident('key');", $expect, $act);
 
 
+        // Arrange Test
+        // $UTest->nextHint = 'q4';
+        // $expect = '';
+        // Act
+        // $act = Get::ident('boolean');
+        // Assert Test
+        // $UTest->isEqual("ident('boolean');", $expect, $act);
+
+
         return $UTest->functionResults;
     }
 
     /**
-     * isDefinedTest() - тест для метода isDefined
-     * @version v1.0.1 2018-10-17 08:52:53
+     * Тест для метода isDefined
+     * @version v1.0.2 2018-12-06 12:05:28
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function isDefinedTest()
@@ -241,8 +254,9 @@ class GetTest
     }
 
     /**
-     * isNotSetTest() - тест для метода isNotSet
-     * @version v1.0.1 2018-10-17 08:53:24
+     * Тест для метода isNotSet
+     * @version v1.0.2 2018-12-06 12:05:34
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function isNotSetTest()
@@ -283,8 +297,9 @@ class GetTest
     }
 
     /**
-     * isNullTest() - тест для метода isNull
-     * @version v1.0.1 2018-10-17 08:53:59
+     * Тест для метода isNull
+     * @version v1.0.2 2018-12-06 12:05:39
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function isNullTest()
@@ -325,8 +340,9 @@ class GetTest
     }
 
     /**
-     * is1Test() - тест для метода is1
-     * @version v1.0.1 2018-10-17 08:54:19
+     * Тест для метода is1
+     * @version v1.0.2 2018-12-06 12:05:43
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function is1Test()
@@ -376,8 +392,9 @@ class GetTest
     }
 
     /**
-     * isEmptyTest() - тест для метода isEmpty
-     * @version v1.0.1 2018-10-17 08:54:48
+     * Тест для метода isEmpty
+     * @version v1.0.2 2018-12-06 12:05:49
+     * @global object $UTest - Глобальный объект UTest
      * @return string - html тег с сообщением результата прохождения теста
      */
     public static function isEmptyTest()
@@ -439,6 +456,58 @@ class GetTest
         $act = Get::isEmpty('key');
         // Assert Test
         $UTest->isEqual("isEmpty('key');", $expect, $act);
+
+
+        return $UTest->functionResults;
+    }
+
+    /**
+     * Тест для метода float
+     * @version v1.0.2 2018-12-06 12:05:55
+     * @global object $UTest - Глобальный объект UTest
+     * @return string - html тег с сообщением результата прохождения теста
+     */
+    public static function floatTest()
+    {
+        global $UTest;
+
+        $UTest->methodName = 'float';
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q1';
+        $expect = (float) 0;
+        // Act
+        $act = Get::float('onlykey');
+        // Assert Test
+        $UTest->isEqual("float('onlykey');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = (float) 0;
+        // Act
+        $act = Get::float('notdefined');
+        // Assert Test
+        $UTest->isEqual("float('notdefined');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q3';
+        $expect = (float) 1;
+        // Act
+        $act = Get::float('boolean');
+        // Assert Test
+        $UTest->isEqual("float('boolean');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q4';
+        $expect = (float) 0;
+        // Act
+        $act = Get::float('key');
+        // Assert Test
+        $UTest->isEqual("float('key');", $expect, $act);
 
 
         return $UTest->functionResults;

@@ -20,39 +20,42 @@ namespace j4s\superglobals;
  * 
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v0.1.0 2018-11-10 14:49:10
+ * @version     v1.0.0 2018-12-06 10:06:39
  * @since       v0.2.0
  */
-class Cookie extends Superglobals implements SuperglobalInterface
+class Cookie extends Superglobals implements SuperglobalStrictInterface
 {
     /** @var string $arrayName Имя массива для валидатора */
     public static $arrayName = '_COOKIE';
     /** @var int $inputConstant Константа для фильтра */
     public static $inputConstant = INPUT_COOKIE;
+    /** @var bool $convertNumeric пытаться ли конвертировать строку в число? */
+    public static $convertNumeric = true;
 
     /**
      * Возвращает значение заданного ключа либо значение по умолчанию.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        value      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |       default     |      default      |
-     * @version v0.1.0 2018-11-10 14:49:23
+     * значение не заданно  |1      default     |2     default      |
+     * значение заданно     |3       value      |XXXXXXXXXXXXXXXXXXX|
+     * @version v1.0.1 2018-12-06 15:10:58
      * @since   v0.2.0
      * @param string $key - ключ
-     * @param mixed $default - значение по умолчанию
-     * @return mixed - значение ключа или значение по умолчанию
+     * @param string $default - значение по умолчанию
+     * @return string - значение ключа или значение по умолчанию
      */
-    public static function get(string $key, $default = '')
+    public static function get(string $key, string $default = '') : string
     {
         $r = $_COOKIE[$key] ?? $default;
+
         return $r;
     }
 
     /**
-     * Возаращает true если определен ключ. Если же ключ не задан вернет false.
+     * Возвращает true если определен ключ. Если же ключ не задан вернет false.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        TRUE       |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        TRUE       |       FALSE       |
-     * @version v0.1.0 2018-11-10 14:49:38
+     * значение не заданно  |1       TRUE       |2      FALSE       |
+     * значение заданно     |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
+     * @version v0.1.2 2018-12-06 15:12:16
      * @since   v0.2.0
      * @param string $key - Ключ
      * @return bool
@@ -61,4 +64,5 @@ class Cookie extends Superglobals implements SuperglobalInterface
     {
         return isset($_COOKIE[$key]);
     }
+
 }
