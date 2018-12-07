@@ -20,7 +20,7 @@ namespace j4s\superglobals;
  * 
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v2.1.0 2018-11-12 09:37:03
+ * @version     v2.2.1 2018-12-07 12:10:29
  */
 class Session extends Superglobals implements SuperglobalInterface
 {
@@ -28,6 +28,8 @@ class Session extends Superglobals implements SuperglobalInterface
     public static $arrayName = '_SESSION';
     /** @var int $inputConstant Константа для фильтра */
     public static $inputConstant = INPUT_SESSION;
+    /** @var bool $convertNumeric пытаться ли конвертировать строку в число? */
+    public static $convertNumeric = false;
 
     /**
      * Возвращает значение заданного ключа либо значение по умолчанию.
@@ -50,9 +52,9 @@ class Session extends Superglobals implements SuperglobalInterface
      * Возвращает значение ключа, если целое число, либо значение по умолчанию
      *       Значение       |   ключ определен  | ключ не определен |
      *     не заданно       |1      default     |2     default      |
-     *     целое число      |3       value      |XXXXXXXXXXXXXXXXXXX|
+     *     целое число      |3    (int)value    |XXXXXXXXXXXXXXXXXXX|
      *   другое значение    |4      default     |XXXXXXXXXXXXXXXXXXX|
-     * @version v1.0.2 2018-11-12 09:41:14
+     * @version v1.0.3 2018-12-06 09:50:59
      * @param string $key - ключ
      * @param int $default - значение по умолчанию
      * @return int - Значение ключа, если целое число, либо значение по умолчанию
@@ -119,6 +121,43 @@ class Session extends Superglobals implements SuperglobalInterface
         $_SESSION[$key] = $value;
 
         return $_SESSION[$key] === $value;
+    }
+
+    /**
+     * Возвращает значение ключа, если оно - число с плавающей точкой, либо значение по умолчанию.
+     *       Значение       |   ключ определен  | ключ не определен |
+     *     не заданно       |1      default     |2     default      |
+     *     float число      |3   (float)value   |XXXXXXXXXXXXXXXXXXX|
+     *    не float число    |4      default     |XXXXXXXXXXXXXXXXXXX|
+     * @version v0.1.0 2018-12-06 09:52:25
+     * @since v1.0.0-alpha.3
+     * @param string $key - ключ
+     * @param float $default - значение по умолчанию
+     * @return float
+     */
+    public static function float(string $key, float $default = 0) : float
+    {
+        $r1 = static::get($key, $default);
+        $r = is_float($r1) ? $r1 : $default;
+
+        return $r;
+    }
+
+    /**
+     * is1 - Возвращает true только если значение ключа === 1
+     *                      |   ключ определен  | ключ не определен |
+     * значение не заданно  |1       FALSE      |2      FALSE       |
+     *    значение === 1    |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
+     *   значение === '1'   |4       FALSE      |XXXXXXXXXXXXXXXXXXX|
+     *    значение !== 1    |5       FALSE      |XXXXXXXXXXXXXXXXXXX|
+     * @version v2.0.1 2018-12-07 12:10:23
+     * @since v1.0.0-alpha.3
+     * @param string $key - Ключ
+     * @return bool
+     */
+    public static function is1(string $key) : bool
+    {
+        return static::get($key) === 1;
     }
 
 }

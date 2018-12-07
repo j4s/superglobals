@@ -77,12 +77,12 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
     }
 
     /**
-     * is1 - Возвращает true только если значение ключа = 1
+     * is1 - Возвращает true только если значение ключа == 1
      *                      |   ключ определен  | ключ не определен |
      * значение не заданно  |1       FALSE      |2      FALSE       |
      *     значение == 1    |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
      *     значение != 1    |4       FALSE      |XXXXXXXXXXXXXXXXXXX|
-     * @version v1.0.3 2018-11-09 08:28:59
+     * @version v1.0.4 2018-12-06 12:03:25
      * @param string $key - Ключ
      * @return bool
      */
@@ -92,10 +92,11 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
     }
 
     /**
-     * Возвращает значение ключа, если целое число, либо значение по умолчанию
+     * Возвращает значение ключа, если целое число, либо значение по умолчанию.
+     * Внимание! Данный метод не будет приводить float к int, а выдаст занчение по умолчанию.
      *       Значение       |   ключ определен  | ключ не определен |
      *     не заданно       |1      default     |2     default      |
-     *     целое число      |3       value      |XXXXXXXXXXXXXXXXXXX|
+     *     целое число      |3    (int)value    |XXXXXXXXXXXXXXXXXXX|
      *    не целое число    |4      default     |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.2 2018-11-06 08:49:54
      * @param string $key - ключ
@@ -129,7 +130,7 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
         // q1
         } elseif (static::isNull($key)) {
             return $ifNotSet;
-        // q3
+        // q3 До этого варианта не доходит, потому что перед этим проверка на isNull С которой $_GET не может справиться по определению (если не считать вопроса с яваскриптовой реализацией).
         } elseif (static::get($key) == '') {
             return true;
         // q4
@@ -137,4 +138,25 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
             return false;
         }
     }
+
+    /**
+     * Возвращает значение ключа, если оно - число с плавающей точкой, либо значение по умолчанию.
+     *       Значение       |   ключ определен  | ключ не определен |
+     *     не заданно       |1      default     |2     default      |
+     *     float число      |3   (float)value   |XXXXXXXXXXXXXXXXXXX|
+     *    не float число    |4      default     |XXXXXXXXXXXXXXXXXXX|
+     * @version v0.1.0 2018-12-06 09:52:25
+     * @since v1.0.0-alpha.3
+     * @param string $key - ключ
+     * @param float $default - значение по умолчанию
+     * @return float
+     */
+    public static function float(string $key, float $default = 0) : float
+    {
+        $r = filter_input(static::$inputConstant, $key, FILTER_VALIDATE_FLOAT);
+        $r = $r === false || $r === null ? $default : $r;
+
+        return $r;
+    }
+
 }

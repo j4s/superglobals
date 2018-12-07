@@ -6,12 +6,12 @@ declare(strict_types=1);
 namespace j4s\superglobals;
 
 /**
- * Данный класс нужен для работы с Post параметрами(в частности с $_POST
+ * Данный класс нужен для работы с Get параметрами(в частности с $_GET
  * массивом), с предварительной обработкой данных полученных в этих параметрах
  * с целью более безопасной работы, и оптимизации работы программиста.
  * 
  * Важное замечание:
- * Исходя из специфики данного класса он обрабатывает $_POST ключи и значения 
+ * Исходя из специфики данного класса он обрабатывает $_GET ключи и значения 
  * неожиданным способом: например, если не заданы запрашиваемый ключ либо
  * его значение, методы класса возвращают не undefined и null соответственно,
  * а именно значение по-умолчанию передаваемое заданным атрибутом методов.
@@ -20,43 +20,46 @@ namespace j4s\superglobals;
  * 
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v2.0.4 2018-11-08 16:53:28
+ * @version     v3.0.0 2018-12-06 10:05:21
  */
-class Post extends Superglobals implements SuperglobalInterface
+class Get extends Superglobals implements SuperglobalStrictInterface
 {
     /** @var string $arrayName Имя массива для валидатора */
-    public static $arrayName = '_POST';
+    public static $arrayName = '_GET';
     /** @var int $inputConstant Константа для фильтра */
-    public static $inputConstant = INPUT_POST;
+    public static $inputConstant = INPUT_GET;
+    /** @var bool $convertNumeric пытаться ли конвертировать строку в число? */
+    public static $convertNumeric = true;
 
     /**
      * Возвращает значение заданного ключа либо значение по умолчанию.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        value      |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |       default     |      default      |
-     * @version v1.0.1 2018-11-05 13:15:41
+     * значение не заданно  |1      default     |2     default      |
+     * значение заданно     |3       value      |XXXXXXXXXXXXXXXXXXX|
+     * @version v2.0.0 2018-12-06 10:05:06
      * @param string $key - ключ
-     * @param mixed $default - значение по умолчанию
-     * @return mixed - значение ключа или значение по умолчанию
+     * @param string $default - значение по умолчанию
+     * @return string - значение ключа или значение по умолчанию
      */
-    public static function get(string $key, $default = '')
+    public static function get(string $key, string $default = '') : string
     {
-        $r = $_POST[$key] ?? $default;
+        $r = $_GET[$key] ?? $default;
+
         return $r;
     }
 
     /**
-     * Возаращает true если определен ключ. Если же ключ не задан вернет false
+     * Возвращает true если определен ключ. Если же ключ не задан вернет false.
      *                      |   ключ определен  | ключ не определен |
-     * значение заданно     |        TRUE       |XXXXXXXXXXXXXXXXXXX|
-     * значение не заданно  |        TRUE       |       FALSE       |
-     * @version v1.0.1 2018-11-08 16:48:12
+     * значение не заданно  |1       TRUE       |2      FALSE       |
+     * значение заданно     |3       TRUE       |XXXXXXXXXXXXXXXXXXX|
+     * @version v1.0.2 2018-12-06 09:59:26
      * @param string $key - Ключ
      * @return bool
      */
     public static function isDefined(string $key) : bool
     {
-        return isset($_POST[$key]);
+        return isset($_GET[$key]);
     }
 
 }
