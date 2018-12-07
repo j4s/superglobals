@@ -18,7 +18,7 @@ Using this library you can:
  We have such a methods:
  * **get(string $key, string $default = '')** : string - Returns the value of ```preset``` key, or ```preset``` default value.
  
- * **int(string $key, int $default = 0)** : int - Returns the value of ```preset``` key, if it is intager or ```preset``` default value.
+ * **int(string $key, int $default = 0)** : int - Returns the value of ```preset``` key, if it is integer or ```preset``` default value.
  
  * **ident(string $key, string $default = '')** : string - Returns the value of ```preset``` key, if it contains only this: a-zA-Z0-9_- symbols, or ```preset``` default value.
  
