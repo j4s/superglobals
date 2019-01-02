@@ -22,7 +22,7 @@ namespace j4s\superglobals;
  * @property    inputConstant
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v2.0.0 2018-11-09 11:59:24
+ * @version     v2.1.0 2019-01-03 02:02:24
  * @method static get($key, $default)
  * @method static isDefined(string $key)
  */
@@ -160,6 +160,26 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
         $r = $r === false || $r === null ? $default : $r;
 
         return $r;
+    }
+
+    /**
+     * Возвращает значение ключа, если оно положительное целое число, либо значение по умолчанию.
+     * Внимание! Данный метод не будет приводить float к int, а выдаст занчение по умолчанию.
+     *       Значение       |   ключ определен  | ключ не определен |
+     *     не заданно       |1      default     |2     default      |
+     *     целое число > 0  |3    (int)value    |XXXXXXXXXXXXXXXXXXX|
+     *    целое число <= 0  |4      default     |XXXXXXXXXXXXXXXXXXX|
+     *    не целое число    |5      default     |XXXXXXXXXXXXXXXXXXX|
+     * @version v1.0.0 2019-01-03 02:00:57
+     * @param string $key - ключ
+     * @param int $default - значение по умолчанию
+     * @return int - Значение ключа, если целое положительное число, либо значение по умолчанию
+     */
+    public static function id(string $key, int $default = 0) : int
+    {
+        $r = static::int($key, $default);
+
+        return $r > 0 ? $r : $default;
     }
 
 }
