@@ -1,5 +1,6 @@
 SuperGlobals
 =========
+v1.0.0-alpha.3
 
 SuperGlobals is a PHP library for safe and convenient handling of SuperGlobals such as ```$_GET```, ```$_POST```, ```$_SESSION```, ```$_COOKIE```.
 - Safe because you can use special <b>methods</b> to validate or filter requested value "on the fly"
