@@ -171,6 +171,7 @@ abstract class Superglobals extends ValidateSuperglobalsOrNot
      *    целое число <= 0  |4      default     |XXXXXXXXXXXXXXXXXXX|
      *    не целое число    |5      default     |XXXXXXXXXXXXXXXXXXX|
      * @version v1.0.0 2019-01-03 02:00:57
+     * @since v1.0.0-alpha.4
      * @param string $key - ключ
      * @param int $default - значение по умолчанию
      * @return int - Значение ключа, если целое положительное число, либо значение по умолчанию
