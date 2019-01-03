@@ -160,4 +160,15 @@ class Session extends Superglobals implements SuperglobalInterface
         return static::get($key) === 1;
     }
 
+    /**
+     * unset - Удаляет из массива $_SESSION ключ со значением
+     * @version v1.0.0 2019-01-03 11:40:31
+     * @since v1.0.0-alpha.4
+     * @param string $key - ключ
+     */
+    public static function unset(string $key)
+    {
+        unset($_SESSION[$key]);
+    }
+
 }
