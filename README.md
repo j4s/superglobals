@@ -23,6 +23,8 @@ Using this library you can:
  
  * **float(string $key, float $default = 0)** : float - Returns the value of ```preset``` key, if it is float or ```preset``` default value.
 
+ * **array(string $key, array $default = array())** : array - Returns the value of ```preset``` key, if it is an array or ```preset``` default value.
+
  * **ident(string $key, string $default = '')** : string - Returns the value of ```preset``` key, if it contains only this: a-zA-Z0-9_- symbols, or ```preset``` default value.
  
  * **isDefined(string $key)** : bool - Returns ```TRUE``` if the the ```preset``` key is defined, or ```FALSE``` if it is not.
