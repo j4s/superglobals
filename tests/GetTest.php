@@ -10,14 +10,14 @@ namespace j4s\superglobals;
  *
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v1.0.4 2018-12-06 12:11:49
+ * @version     v1.1.0 2019-05-18 16:22:24
  */
 class GetTest
 {
 
     /**
      * Запускает тесты данного класса
-     * @version v1.0.3 2018-12-06 12:13:16
+     * @version v1.1.0 2019-05-18 16:22:11
      * @return void
      */
     public static function run()
@@ -33,6 +33,7 @@ class GetTest
         echo self::is1Test();
         echo self::isEmptyTest();
         echo self::floatTest();
+        echo self::arrayTest();
         echo '</div>';
     }
 
@@ -508,6 +509,59 @@ class GetTest
         $act = Get::float('key');
         // Assert Test
         $UTest->isEqual("float('key');", $expect, $act);
+
+
+        return $UTest->functionResults;
+    }
+
+    /**
+     * Тест для метода array
+     * @version v0.1.0 2019-05-18 16:18:50
+     * @since v1.0.0-alpha.4
+     * @global object $UTest - Глобальный объект UTest
+     * @return string - html тег с сообщением результата прохождения теста
+     */
+    public static function arrayTest()
+    {
+        global $UTest;
+
+        $UTest->methodName = 'array';
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q1';
+        $expect = array();
+        // Act
+        $act = Get::array('onlykey');
+        // Assert Test
+        $UTest->isEqual("array('onlykey');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q2';
+        $expect = array();
+        // Act
+        $act = Get::array('notdefined');
+        // Assert Test
+        $UTest->isEqual("array('notdefined');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q3';
+        $expect = array('bar', 'baz', '8');
+        // Act
+        $act = Get::array('foo');
+        // Assert Test
+        $UTest->isEqual("array('foo');", $expect, $act);
+
+
+        // Arrange Test
+        $UTest->nextHint = 'q4';
+        $expect = array();
+        // Act
+        $act = Get::array('key');
+        // Assert Test
+        $UTest->isEqual("array('key');", $expect, $act);
 
 
         return $UTest->functionResults;
