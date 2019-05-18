@@ -20,7 +20,7 @@ namespace j4s\superglobals;
  * 
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v3.0.0 2018-12-06 10:05:21
+ * @version     v3.1.0 2019-05-18 11:41:36
  */
 class Get extends Superglobals implements SuperglobalStrictInterface
 {
@@ -60,6 +60,26 @@ class Get extends Superglobals implements SuperglobalStrictInterface
     public static function isDefined(string $key) : bool
     {
         return isset($_GET[$key]);
+    }
+
+
+    /**
+     * Возвращает массив - значение заданого ключа, если оно явялется массивом, либо значение по умолчанию.
+     *       Значение       |   ключ определен  | ключ не определен |
+     *     не заданно       |1      default     |2     default      |
+     *      is array        |3       array      |XXXXXXXXXXXXXXXXXXX|
+     *    is not an array   |4      default     |XXXXXXXXXXXXXXXXXXX|
+     * @version v0.1.0 2019-04-06 16:19:16
+     * @since v1.0.0-alpha.4
+     * @param string $key - ключ
+     * @param array $default - значение по умолчанию
+     * @return array
+     */
+    public static function array(string $key, array $default = array()) : array
+    {
+        $r = is_array($_GET[$key]) ? $_GET[$key] : $default;
+
+        return $r;
     }
 
 }
