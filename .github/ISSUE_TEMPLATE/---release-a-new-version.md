@@ -11,6 +11,7 @@ assignees: in4s
 - [ ] Update RSR (optional)
 - [ ] git pull
 - [ ] git checkout -b ReleaseISSUE_NUMBER
+- [ ] Check whether you need to edit the README.md description
 - [ ] check PSR by running php-cs-fixer
     - [ ] php-cs-fixer fix .
     - [ ] if files was changed
