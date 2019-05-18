@@ -21,6 +21,8 @@ Using this library you can:
  
  * **int(string $key, int $default = 0)** : int - Returns the value of ```preset``` key, if it is integer or ```preset``` default value.
  
+ * **float(string $key, float $default = 0)** : float - Returns the value of ```preset``` key, if it is float or ```preset``` default value.
+
  * **ident(string $key, string $default = '')** : string - Returns the value of ```preset``` key, if it contains only this: a-zA-Z0-9_- symbols, or ```preset``` default value.
  
  * **isDefined(string $key)** : bool - Returns ```TRUE``` if the the ```preset``` key is defined, or ```FALSE``` if it is not.
