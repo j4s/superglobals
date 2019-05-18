@@ -20,7 +20,7 @@ namespace j4s\superglobals;
  * 
  * @package     superglobals
  * @author      Eugeniy Makarkin <soloscriptura@mail.ru>
- * @version     v3.0.0 2018-12-06 10:05:21
+ * @version     v3.1.0 2019-05-18 11:41:36
  */
 class Get extends Superglobals implements SuperglobalStrictInterface
 {
