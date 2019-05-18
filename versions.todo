@@ -1,4 +1,30 @@
 releases:
+v1.0.0 Yankee Update (2019-05-18 19:03:23)
+ 🛠 edit Release Version instruction: add Check whether you need to edit the README.md description refactoring
+ 🛠 Rebuild diagram, edit README.md refactoring
+ ✔ 🚨 add tests and correct behavior of Get::array() method bug
+ ✔ Добавить метод unset для удаления записей Session, Cookie enhancement
+ ✔ Обновить диаграмму в readme bug
+ ✔ Не проходит один из тестов класса Session bug
+ ✔ Продумать, что делать с интерфейсом метода get *
+ ✔ Для convertNumeric классов метод get должен возвращать только string bug
+ ✔ Синхронизировать квадраты в комментариях Get, Post * bug
+ ✔ В SessionTest.php добавить тесты двух методов: * bug
+ ✔ Проверить DocBlocs тестов
+ ✔ Внести исправления в файлах тестов: bug
+ ✔ Проверить float тесты * bug
+ ✔ Покрыть метод float тестами *
+ ✔ исправить опечатку в слове integer в readme.md bug
+ ✔ Добавить константу convertNumeric к конечным классам * enhancement
+ ✔ autoload looses tests bug
+ ✔ make ValidateSuperglobalsOrNot() abstract bug
+ ✔ change namespase of validation
+ ✔ Сделать стандартную структуру файлов и папок в библиотеке enhancement refactoring
+ ✔ version in composer begins with "v" bug
+ ✔ Разобраться с интерфейсом ValidatorInterface(); * bug
+ ✔ Выпустить v1.0.0-alpha
+ ✔ Superglobals.php добавить корректную обработку второго аргумента метода bug
+
 v1.0.0-alpha.3 close #45, close #46, close #47, close #48, close #49, close #50, close #51, close #52, close #53, close #56, close #57, close #58, close #60, close #43
  ✔ исправить опечатку в слове integer в readme.md #43 @done (18-12-06 15:18)
  ✔ Добавить константу convertNumeric к конечным классам * #45 @done (18-12-06 10:01)
